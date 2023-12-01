@@ -11,7 +11,7 @@ class Server:
 
         try:
 
-            result = subprocess.run(['ping', '-n', '4', self.server_ip], capture_output=True, text=True, check=True)
+            result = subprocess.run(['ping', '-n', '6', self.server_ip], capture_output=True, text=True, check=True)
 
             ping_output = result.stdout
 
@@ -21,9 +21,6 @@ class Server:
             return f"Error: {e}"
 
 
-server_ip = "35.160.182.172"
-my_server = Server(server_ip)
-ping_result = my_server.ping()
-print(ping_result)
+
 
 

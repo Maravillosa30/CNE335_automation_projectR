@@ -1,20 +1,7 @@
 # This is the template code for the CNE335 Final Project
 # Rosa Hulbert
 # CNE 335 Fall
-
-import subprocess
-
-
-class Server:
-    def __init__(self, server_ip):
-        self.server_ip = server_ip
-
-    def ping(self):
-        try:
-            result = subprocess.check_output(["ping", "-n", "5", self.server_ip], text=True)
-            return result
-        except subprocess.CalledProcessError as e:
-            return f"Error: {e}"
+from Server import Server
 
 
 def print_program_info():
