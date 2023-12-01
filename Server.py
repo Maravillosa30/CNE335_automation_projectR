@@ -1,4 +1,4 @@
-import os
+import subprocess
 
 
 class Server:
@@ -8,18 +8,22 @@ class Server:
         self.server_ip = server_ip
 
     def ping(self):
-        # TODO - Use os module to ping the server
-        response = os.system(f"ping -n 4 {self.server_ip}")
-        # The value of 'response' indicates the success of the ping. 0 means success.
-        if response == 0:
-            return f"The server {self.server_ip} is reachable."
-        else:
-            return f"The server {self.server_ip} is not reachable."
+
+        try:
+
+            result = subprocess.run(['ping', '-n', '4', self.server_ip], capture_output=True, text=True, check=True)
+
+            ping_output = result.stdout
+
+            return ping_output
+        except subprocess.CalledProcessError as e:
+            # Handle errors, if any
+            return f"Error: {e}"
 
 
-# Instantiate the Server class with a server IP
-my_server = Server("35.160.182.172")
-
-# Call the ping method and print the result
+server_ip = "35.160.182.172"
+my_server = Server(server_ip)
 ping_result = my_server.ping()
 print(ping_result)
+
+
